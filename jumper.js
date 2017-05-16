@@ -55,7 +55,7 @@ JUMPER STATES:
 
 */
 function updateJumper() {
-    console.log(velocity);
+    // console.log(velocity);
     velocity.y += gravity * dt;
     //lift and frag force
     var speed = distance({x: 0, y: 0}, velocity);
@@ -101,7 +101,7 @@ function updateJumper() {
             velocity.x -= impulse.x * (temp + penetration * 2);
             velocity.y -= impulse.y * (temp + penetration * 2);
             if (landed === false) {
-                document.getElementById("distance").innerHTML = pref[jumperSegment] + distance(outrun[jumperSegment], position) / scl;
+                document.getElementById("distance").innerHTML = distanceConvert(pref[jumperSegment] + distance(outrun[jumperSegment], position) / scl);
                 landed = true;
             }
         }
@@ -116,8 +116,8 @@ function takeOff() {
         else {
             velocity.y -= 0;
         }
-        aerodynamic = 0.00024;
-        dragCoefficient = 0.00022;
+        aerodynamic = 0.00018;
+        dragCoefficient = 0.00015;
         jumped = true;
     }
 }

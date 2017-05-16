@@ -152,6 +152,15 @@ function getNormal(p1, p2) {
     return normal;
 }
 
+function distanceConvert(meters)
+{
+    console.log(meters);
+    meters *= 2;
+    console.log(meters);    
+    meters = Math.round(meters);    
+    return meters/2;
+}
+
 function dotProduct(v1, v2) {
     return v1.x * v2.x + v1.y * v2.y;
 }

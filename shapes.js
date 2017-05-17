@@ -127,19 +127,23 @@ outrun.push({
 //});
 var pref = [];
 
-function distance(a, b) {
+function distance(a, b)
+{
     return Math.sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y));
 }
 
-function calculatePref() {
+function calculatePref()
+{
     pref[0] = 0;
 
-    for (var i = 1; i < outrun.length; i++) {
-        pref[i] = pref[i - 1] + distance(outrun[i], outrun[i - 1])/scl;
+    for (var i = 1; i < outrun.length; i++)
+    {
+        pref[i] = pref[i - 1] + distance(outrun[i], outrun[i - 1]) / scl;
     }
 }
 
-function getNormal(p1, p2) {
+function getNormal(p1, p2)
+{
     var vec = {
         x: p2.x - p1.x,
         y: p2.y - p1.y
@@ -158,35 +162,41 @@ function distanceConvert(meters)
 {
     console.log(meters);
     meters *= 2;
-    console.log(meters);    
-    meters = Math.round(meters);    
-    return meters/2;
+    console.log(meters);
+    meters = Math.round(meters);
+    return meters / 2;
 }
 
-function dotProduct(v1, v2) {
+function dotProduct(v1, v2)
+{
     return v1.x * v2.x + v1.y * v2.y;
 }
 
 calculatePref();
 
-function drawHill() {
-    for (var i = 0; i < inrun.length - 1; i++) {
+function drawHill()
+{
+    for (var i = 0; i < inrun.length - 1; i++)
+    {
         stroke(255);
         line(inrun[i].x, inrun[i].y, inrun[i + 1].x, inrun[i + 1].y);
     }
 
-    for (var i = 0; i < inrun.length; i++) {
+    for (var i = 0; i < inrun.length; i++)
+    {
         stroke(100, 200, 100);
         fill(100, 200, 100);
         ellipse(inrun[i].x, inrun[i].y, 2);
     }
 
-    for (var i = 0; i < outrun.length - 1; i++) {
+    for (var i = 0; i < outrun.length - 1; i++)
+    {
         stroke(255);
         line(outrun[i].x, outrun[i].y, outrun[i + 1].x, outrun[i + 1].y);
     }
 
-    for (var i = 0; i < outrun.length; i++) {
+    for (var i = 0; i < outrun.length; i++)
+    {
         stroke(255, 0, 100);
         fill(255, 0, 100);
         ellipse(outrun[i].x, outrun[i].y, 2);

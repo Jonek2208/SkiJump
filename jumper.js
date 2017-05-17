@@ -16,19 +16,23 @@ var aerodynamic = 0;
 var dragCoefficient = 0;
 
 
-function det(a, b, c) {
+function det(a, b, c)
+{
     return (b.x - a.x) * (c.y - b.y) - (b.y - a.y) * (c.x - b.x);
 }
 
-function drawJumper() {
+function drawJumper()
+{
     stroke(200);
     fill(50, 100, 255);
     ellipse(position.x, position.y, 5);
     document.getElementById("segment").innerHTML = jumperSegment;
-    if (!landed) {
+    if (!landed)
+    {
         document.getElementById("distance").innerHTML = pref[jumperSegment];
     }
-    else {
+    else
+    {
         //        document.getElementById("distance").innerHTML = pref[jumperSegment] + distance(outrun[jumperSegment], landingPosition);
         //        console.log(distance(outrun[jumperSegment], position));
     }
@@ -54,24 +58,28 @@ JUMPER STATES:
 
 
 */
-function updateJumper() {
+function updateJumper()
+{
     // console.log(velocity);
     velocity.y += gravity * dt;
     //lift and frag force
-    var speed = distance({x: 0, y: 0}, velocity);
-    var lift = {x: velocity.y * speed * aerodynamic, y: -velocity.x * speed * aerodynamic};
-    var drag = {x: -velocity.x * speed * dragCoefficient, y: -velocity.y * speed * dragCoefficient};
-    
+    var speed = distance({ x: 0, y: 0 }, velocity);
+    var lift = { x: velocity.y * speed * aerodynamic, y: -velocity.x * speed * aerodynamic };
+    var drag = { x: -velocity.x * speed * dragCoefficient, y: -velocity.y * speed * dragCoefficient };
+
     velocity.x += lift.x + drag.x;
     velocity.y += lift.y + drag.y;
 
     position.x += velocity.x * dt;
     position.y += velocity.y * dt;
-    if (position.x < inrun[inrun.length - 1].x) {
-        if (position.x >= inrun[inrunSegment + 1].x) {
+    if (position.x < inrun[inrun.length - 1].x)
+    {
+        if (position.x >= inrun[inrunSegment + 1].x)
+        {
             inrunSegment++;
         }
-        if (det(inrun[inrunSegment], position, inrun[inrunSegment + 1]) <= 0) {
+        if (det(inrun[inrunSegment], position, inrun[inrunSegment + 1]) <= 0)
+        {
             var impulse = getNormal(inrun[inrunSegment], inrun[inrunSegment + 1]);
             var temp = dotProduct(impulse, velocity);
             var pom = {
@@ -86,11 +94,14 @@ function updateJumper() {
             velocity.y -= impulse.y * (temp + penetration * 10);
         }
     }
-    else {
-        if (position.x >= outrun[jumperSegment + 1].x) {
+    else
+    {
+        if (position.x >= outrun[jumperSegment + 1].x)
+        {
             jumperSegment++;
         }
-        if (det(outrun[jumperSegment], position, outrun[jumperSegment + 1]) <= 0) {
+        if (det(outrun[jumperSegment], position, outrun[jumperSegment + 1]) <= 0)
+        {
             var impulse = getNormal(outrun[jumperSegment], outrun[jumperSegment + 1]);
             var temp = dotProduct(impulse, velocity);
             var pom = {
@@ -100,21 +111,28 @@ function updateJumper() {
             var penetration = dotProduct(impulse, pom);
             velocity.x -= impulse.x * (temp + penetration * 2);
             velocity.y -= impulse.y * (temp + penetration * 2);
-            if (landed === false) {
-                document.getElementById("distance").innerHTML = distanceConvert(pref[jumperSegment] + distance(outrun[jumperSegment], position) / scl);
+            if (landed === false)
+            {
+                document.getElementById("distance").innerHTML = distanceConvert(pref[jumperSegment] +
+                    distance(outrun[jumperSegment], position) / scl) + ' m';
+                landingPosition = { x: position.x, y: position.y };
                 landed = true;
             }
         }
     }
 }
 
-function takeOff() {
-    if (!jumped) {
-        if (position.x <= inrun[inrun.length - 1].x) {
+function takeOff()
+{
+    if (!jumped)
+    {
+        if (position.x <= inrun[inrun.length - 1].x)
+        {
             velocity.y -= 5;
         }
-        else {
-            velocity.y -= 0;
+        else
+        {
+            velocity.y -= 2;
         }
         aerodynamic = 0.00018;
         dragCoefficient = 0.00015;

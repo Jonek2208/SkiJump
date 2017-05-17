@@ -14,7 +14,18 @@
     <div style="clear:both;"></div>
     <canvas id="myCanvas" width="600" height="600" style="background-color: #FF0099; display: inline-block;"></canvas>
     <script type="text/javascript">
-
+        var canvas = document.getElementById("myCanvas");
+        var context = canvas.getContext("2d");
+        var step = 2;
+        function addText(x, y, text, align)
+        {
+            context.beginPath();
+            context.font = '9pt Calibri';
+            context.fillStyle = 'black';
+            context.textAlign = (typeof align == 'undefined') ? 'left' : align;
+            context.fillText(text, x * step, y * step);
+        }
+        addText(100, 100, 'SkiJump');
     </script>
 </body>
 

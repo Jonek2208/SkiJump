@@ -33,17 +33,24 @@ function drawJumper()
     }
     else
     {
-        //        document.getElementById("distance").innerHTML = pref[jumperSegment] + distance(outrun[jumperSegment], landingPosition);
+        //        document.getElementById("distance").innerHTML = 
+        // pref[jumperSegment] + distance(outrun[jumperSegment], landingPosition);
         //        console.log(distance(outrun[jumperSegment], position));
     }
 
-    stroke(250, 200, 0);
-    line(position.x , position.y, position.x + velocity.x, position.y + velocity.y);
-    triangle(position.x + velocity.x, position.y + velocity.y, 
-    position.x + velocity.x + 5 * (-velocity.x + velocity.y) / getLength(velocity), 
-    position.y + velocity.y + 5 * (-velocity.y + velocity.x) / getLength(velocity), 
-    position.x + velocity.x + 5 * (-velocity.x + velocity.x) / getLength(velocity), 
-    position.y + velocity.y + 5 * (-velocity.y + velocity.x) / getLength(velocity));
+    stroke(250, 250, 100);
+    fill(250, 250, 100);
+    var speed = getLength(velocity);
+    var tangent = { x: velocity.x / speed, y: velocity.y / speed }, normal = { x: tangent.y, y: -tangent.x };
+    var size = 5, tran = 10;
+    line(position.x + tran * normal.x, position.y + tran * normal.y,
+        position.x + velocity.x + tran * normal.x, position.y + velocity.y + tran * normal.y);
+    triangle(position.x + velocity.x + size * tangent.x + tran * normal.x,
+        position.y + velocity.y + size * tangent.y + tran * normal.y,
+        position.x + velocity.x + size * normal.x + tran * normal.x,
+        position.y + velocity.y + size * normal.y + tran * normal.y,
+        position.x + velocity.x - size * normal.x + tran * normal.x,
+        position.y + velocity.y - size * normal.y + tran * normal.y);
     //    console.log(velocity);
     //    console.log(det(outrun[jumperSegment], position, outrun[jumperSegment+1]));
 }
@@ -147,5 +154,3 @@ function takeOff()
         jumped = true;
     }
 }
-
-3

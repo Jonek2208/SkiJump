@@ -158,6 +158,11 @@ function getNormal(p1, p2)
     return normal;
 }
 
+function getLength(p1)
+{
+    return Math.sqrt(p1.x * p1.x + p1.y * p1.y);
+}
+
 function distanceConvert(meters)
 {
     console.log(meters);

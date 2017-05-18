@@ -36,6 +36,14 @@ function drawJumper()
         //        document.getElementById("distance").innerHTML = pref[jumperSegment] + distance(outrun[jumperSegment], landingPosition);
         //        console.log(distance(outrun[jumperSegment], position));
     }
+
+    stroke(250, 200, 0);
+    line(position.x , position.y, position.x + velocity.x, position.y + velocity.y);
+    triangle(position.x + velocity.x, position.y + velocity.y, 
+    position.x + velocity.x + 5 * (-velocity.x + velocity.y) / getLength(velocity), 
+    position.y + velocity.y + 5 * (-velocity.y + velocity.x) / getLength(velocity), 
+    position.x + velocity.x + 5 * (-velocity.x + velocity.x) / getLength(velocity), 
+    position.y + velocity.y + 5 * (-velocity.y + velocity.x) / getLength(velocity));
     //    console.log(velocity);
     //    console.log(det(outrun[jumperSegment], position, outrun[jumperSegment+1]));
 }
@@ -140,4 +148,4 @@ function takeOff()
     }
 }
 
-
+3

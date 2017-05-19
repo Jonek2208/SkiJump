@@ -26,10 +26,13 @@ function drawJumper()
     stroke(200);
     fill(50, 100, 255);
     ellipse(position.x, position.y, 5);
-    document.getElementById("segment").innerHTML = jumperSegment;
+    // document.getElementById("segment").innerHTML = jumperSegment;
+    $("#segment").html(jumperSegment);
     if (!landed)
     {
-        document.getElementById("distance").innerHTML = pref[jumperSegment];
+        // document.getElementById("distance").innerHTML = pref[jumperSegment];
+        $("#distance").html(pref[jumperSegment]);
+
     }
     else
     {

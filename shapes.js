@@ -1,130 +1,42 @@
 //oberstdorf hs137
 
 var inrun = [];
-
-inrun.push({
-    x: 40,
-    y: 300
-});
-inrun.push({
-    x: 103,
-    y: 344
-});
-inrun.push({
-    x: 116,
-    y: 353
-});
-inrun.push({
-    x: 130,
-    y: 360
-});
-inrun.push({
-    x: 140,
-    y: 365
-});
-inrun.push({
-    x: 154,
-    y: 371
-});
-inrun.push({
-    x: 169,
-    y: 376
-});
-inrun.push({
-    x: 191,
-    y: 381
-});
-inrun.push({
-    x: 204,
-    y: 384
-});
-
 var outrun = [];
+var myUrl = 'http://localhost:4000/';
 
-outrun.push({
-    x: 204,
-    y: 391
-});
-outrun.push({
-    x: 224,
-    y: 394
-});
-outrun.push({
-    x: 244,
-    y: 400
-});
-outrun.push({
-    x: 265,
-    y: 408
-});
-outrun.push({
-    x: 285,
-    y: 417
-});
-outrun.push({
-    x: 306,
-    y: 429
-});
-outrun.push({
-    x: 325,
-    y: 441
-});
-outrun.push({
-    x: 346,
-    y: 455
-});
-outrun.push({
-    x: 365,
-    y: 469
-});
-outrun.push({
-    x: 379,
-    y: 479
-});
-outrun.push({
-    x: 393,
-    y: 490
-});
-outrun.push({
-    x: 411,
-    y: 503
-});
-outrun.push({
-    x: 440,
-    y: 523
-});
-outrun.push({
-    x: 452,
-    y: 530
-});
-outrun.push({
-    x: 466,
-    y: 536
-});
-outrun.push({
-    x: 486,
-    y: 544
-});
-outrun.push({
-    x: 505,
-    y: 549
-});
-outrun.push({
-    x: 525,
-    y: 552
-});
-outrun.push({
-    x: 547,
-    y: 554
-});
-outrun.push({
-    x: 630,
-    y: 554
-});
-//outrun.push({
-//    x: 680,
-//    y: 510
-//});
+function loadHill(_id)
+{
+    $.ajax({
+        url: myUrl + 'jumpingHill/' + _id
+    }).done(function (data)
+    {
+        console.log(data.inrun);
+        console.log(data.outrun);
+        for (var i = 0; i < data.inrun.length; i++)
+        {
+            inrun.push({ x: data.inrun.length.x, y: data.inrun.lenght.y });
+        }
+
+        for (var i = 0; i < data.outrun.length; i++)
+        {
+            outrun.push({ x: data.outrun.length.x, y: data.outrun.lenght.y });
+        }
+        
+    }).fail(function (error)
+    {
+        console.log(error);
+    });
+}
+
+loadHill(1);
+
+for (var i = 0; i < inrun.length; i++)
+{
+    console.log(inrun[i]);
+}
+
+console.log(inrun.length);
+
 var pref = [];
 
 function distance(a, b)

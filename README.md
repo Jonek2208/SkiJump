@@ -1,2 +1,3 @@
 # SkiJump
-Simple SkiJumping game
+ToDo:
+hilldata from json
